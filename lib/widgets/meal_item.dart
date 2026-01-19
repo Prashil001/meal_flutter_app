@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/widgets/mealItemProperty.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class Mealitem extends StatelessWidget {
-  const Mealitem({super.key, required this.meal});
+class MealItem extends StatelessWidget {
+  const MealItem({super.key, required this.meal, required this.onSelectMeal});
 
   final Meal meal;
+  final void Function() onSelectMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,8 @@ class Mealitem extends StatelessWidget {
       ),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: (){},
+        onTap: onSelectMeal,
+        splashColor: Theme.of(context).primaryColor,
         child: Stack(
           children: [
             FadeInImage(
@@ -35,6 +38,8 @@ class Mealitem extends StatelessWidget {
                 color: Colors.black54,
                 padding: EdgeInsets.symmetric(vertical: 4,horizontal: 12),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       meal.title,
@@ -47,9 +52,22 @@ class Mealitem extends StatelessWidget {
                         fontSize: 28,
                         color: Colors.white
                       ),
+                    ),
+                    SizedBox(height: 4,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MealItemproperty(icon: Icons.timer, label: '${meal.duration} min'),
+                        SizedBox(width: 10,),
+                        MealItemproperty(icon: Icons.attach_money, label: meal.affordability.name),
+                        SizedBox(width: 10,),
+                        MealItemproperty(icon: Icons.work, label: meal.complexity.name)
+
+                      ],
                     )
                   ],
                 ),
+                
               )
             )
           ],

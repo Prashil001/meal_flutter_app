@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal.dart';
-import 'package:meal_app/widgets/mealItem.dart';
+import 'package:meal_app/screens/meal_deatils.dart';
+import 'package:meal_app/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({super.key,required this.title, required this.meals});
+  const MealsScreen({super.key,this.title, required this.meals,required this.toggleFavourite});
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
+  final void Function(Meal meal) toggleFavourite; 
+
+  void _onSelectMeal(Meal meal,BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (ctx) => MealdetailsScreen(meal: meal,toggleFavourite: toggleFavourite,)));
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +25,14 @@ class MealsScreen extends StatelessWidget {
           Text(
             'Uh oh ... nothing here!',
             style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
           const SizedBox(height: 16),
           Text(
             'Try selecting a different category!',
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
         ],
@@ -34,13 +42,22 @@ class MealsScreen extends StatelessWidget {
     if (meals.isNotEmpty) {
       content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: (ctx, index) => Mealitem(meal: meals[index]),
+        itemBuilder: (ctx, index) => MealItem(
+          meal: meals[index],
+          onSelectMeal: (){
+            _onSelectMeal(meals[index], context);
+          },
+        ),
       );
+    }
+
+    if(title == null){
+      return content;
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
       ),
       body: content,
     );

@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meal_app/screens/categories.dart';
+import 'package:meal_app/screens/tabs.dart';
 
 final appColorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
-  seedColor: const Color.fromARGB(255, 158, 0, 34),
+  seedColor: const Color.fromARGB(255, 1, 255, 200),
 );
 
 final appTheme = ThemeData(
   useMaterial3: true,
   colorScheme: appColorScheme,
-  textTheme: GoogleFonts.changaOneTextTheme(),
+  textTheme: GoogleFonts.archivoTextTheme(),
   appBarTheme: AppBarTheme(
+    elevation: 3,
+    shadowColor: const Color.fromARGB(255, 66, 65, 65),
     centerTitle: true,
     titleTextStyle: TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.bold,
     ),
-    backgroundColor: appColorScheme.onPrimary,
+    backgroundColor: Colors.black,
   ),
-  scaffoldBackgroundColor: appColorScheme.primary,
+  scaffoldBackgroundColor: const Color.fromARGB(80, 0, 0, 0),
 );
 
 void main() {
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: appTheme,
-      home: CategoriesScreen(),
+      home: TabScreen(),
     );
   }
 }

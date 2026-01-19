@@ -18,7 +18,7 @@ class CategoryGridItem extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              category.color.withOpacity(0.4),
+              category.color.withOpacity(0.8),
               category.color.withOpacity(0.9),
             ],
             begin: Alignment.topLeft,
@@ -29,10 +29,13 @@ class CategoryGridItem extends StatelessWidget {
         ),
         child: Center(
           child: Text(
+            textAlign: TextAlign.center,
             category.title,
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: Theme.of(context).colorScheme.surfaceBright,
-            ),
+            style: TextStyle(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            )
           ),
         ),
       ),
