@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:meal_app/data/dummy_data.dart';
 import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/screens/categories_screen.dart';
 import 'package:meal_app/screens/filters_screen.dart';
 import 'package:meal_app/screens/meals_screen.dart';
 import 'package:meal_app/widgets/main_drawer.dart';
+
+Map<Filter,bool> kInitialFilters = {
+  Filter.simple : false,
+  Filter.challenging : false,
+  Filter.hard : false,
+  Filter.vegetarian : false
+};
 
 class TabScreen extends StatefulWidget{
   const TabScreen({super.key});
@@ -19,6 +27,7 @@ class _TabScreenState extends State<TabScreen>{
 
   int currentIndex = 0;
   final List<Meal> _favoriteMeals = [];
+  Map<Filter,bool> _selectedFilters = kInitialFilters;
 
   void changeIndex(int idx){
     setState(() {
@@ -44,20 +53,42 @@ class _TabScreenState extends State<TabScreen>{
     }
   }
 
-  void _setScreen(String identifier){
+  void _setScreen(String identifier) async{
     Navigator.pop(context);
     if(identifier == "filters"){
-      Navigator.push(context, MaterialPageRoute(builder: (ctx){
-        return FiltersScreen();
-      }));
+      var result = await Navigator.of(context).push<Map<Filter,bool>>(
+        MaterialPageRoute(builder: (ctx){
+          return FiltersScreen(currentFilters: _selectedFilters,);
+      }
+      ));
+
+      setState(() {
+        _selectedFilters = result ?? kInitialFilters;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
 
+    final availableMeals = dummyMeals.where((meal) {
+      if (_selectedFilters[Filter.hard]! && meal.complexity != Complexity.hard) {
+        return false;
+      }
+      if (_selectedFilters[Filter.simple]! && meal.complexity != Complexity.simple) {
+        return false;
+      }
+      if (_selectedFilters[Filter.challenging]! && meal.complexity != Complexity.challenging) {
+        return false;
+      }
+      if (_selectedFilters[Filter.vegetarian]! && !meal.isVegetarian) {
+        return false;
+      }
+      return true;
+    }).toList();
+
     String currentScreenTitle = 'Categories';
-    Widget content = CategoriesScreen(toggleFavourite: _toggleFavorites,);
+    Widget content = CategoriesScreen(toggleFavourite: _toggleFavorites,availableMeals: availableMeals,);
 
     if(currentIndex == 1){
       currentScreenTitle = 'Favorites';

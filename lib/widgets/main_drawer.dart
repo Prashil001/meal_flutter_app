@@ -34,7 +34,7 @@ class MainDrawer extends StatelessWidget{
           ),
           ListTile(
             title: Text("Meals",style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),),
             leading: Icon(Icons.fastfood_sharp),
             onTap: (){
@@ -43,7 +43,7 @@ class MainDrawer extends StatelessWidget{
           ),
           ListTile(
             title: Text("Filters",style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),),
             leading: Icon(Icons.filter_alt),
             onTap: (){

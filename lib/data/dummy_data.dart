@@ -160,5 +160,262 @@ final List<Meal> dummyMeals = [
     affordability: Affordability.affordable,
     isVegetarian: true,
   ),
+    // Seafood
+  Meal(
+    id: 'm8',
+    categories: ['c6'],
+    title: 'Fish Curry',
+    imageUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkmOKogYC-nhKy3wcnspsgz1feQn3WZ8IZ1g&s',
+    ingredients: [
+      'Fish',
+      'Onion',
+      'Tomatoes',
+      'Coconut milk',
+      'Curry leaves',
+      'Mustard seeds',
+      'Red chilli powder'
+    ],
+    steps: [
+      'Clean and marinate fish with salt and turmeric',
+      'Saute onions and tomatoes',
+      'Add spices and coconut milk',
+      'Simmer curry for 5 minutes',
+      'Add fish and cook until done'
+    ],
+    duration: 45,
+    complexity: Complexity.challenging,
+    affordability: Affordability.pricey,
+    isVegetarian: false,
+  ),
+
+  // Veg Curries
+  Meal(
+    id: 'm9',
+    categories: ['c9'],
+    title: 'Aloo Gobi',
+    imageUrl:
+        'https://www.foodandwine.com/thmb/cMZecoM65AevIDFL4BC9bn0ZNGQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Aloo-Gobi-FT-RECIPE0623-d0555d951f26447cb2f2d99e00ccc660.jpg',
+    ingredients: [
+      'Potatoes',
+      'Cauliflower',
+      'Onion',
+      'Tomato',
+      'Turmeric',
+      'Cumin',
+      'Coriander'
+    ],
+    steps: [
+      'Heat oil and add cumin',
+      'Saute onions and tomatoes',
+      'Add spices and mix',
+      'Add potatoes and cauliflower',
+      'Cook covered till soft'
+    ],
+    duration: 35,
+    complexity: Complexity.simple,
+    affordability: Affordability.affordable,
+    isVegetarian: true,
+  ),
+
+  // Chicken
+  Meal(
+    id: 'm10',
+    categories: ['c10'],
+    title: 'Chicken Curry',
+    imageUrl:
+        'https://www.foodandwine.com/thmb/8YAIANQTZnGpVWj2XgY0dYH1V4I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/spicy-chicken-curry-FT-RECIPE0321-58f84fdf7b484e7f86894203eb7834e7.jpg',
+    ingredients: [
+      'Chicken',
+      'Onion',
+      'Tomato',
+      'Ginger garlic paste',
+      'Garam masala',
+      'Oil',
+      'Coriander leaves'
+    ],
+    steps: [
+      'Fry onions till golden',
+      'Add ginger garlic paste',
+      'Add tomatoes and cook',
+      'Add chicken and spices',
+      'Add water and simmer till cooked'
+    ],
+    duration: 50,
+    complexity: Complexity.challenging,
+    affordability: Affordability.affordable,
+    isVegetarian: false,
+  ),
+
+  // Mutton
+  Meal(
+    id: 'm11',
+    categories: ['c11'],
+    title: 'Mutton Rogan Josh',
+    imageUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8k67yTXY54xJ04HVg70Kkvl5FbzQkLUtIjA&s',
+    ingredients: [
+      'Mutton',
+      'Yogurt',
+      'Onion',
+      'Garam masala',
+      'Kashmiri chilli',
+      'Ghee'
+    ],
+    steps: [
+      'Heat ghee and fry onions',
+      'Add mutton and sear',
+      'Add spices and yogurt',
+      'Cook on low flame',
+      'Simmer till mutton is tender'
+    ],
+    duration: 100,
+    complexity: Complexity.hard,
+    affordability: Affordability.pricey,
+    isVegetarian: false,
+  ),
+
+  // Snacks
+  Meal(
+    id: 'm12',
+    categories: ['c12'],
+    title: 'Samosa',
+    imageUrl:
+        'https://c.ndtvimg.com/2023-03/0m65kep_samosa_625x300_10_March_23.jpg',
+    ingredients: [
+      'Flour',
+      'Potatoes',
+      'Peas',
+      'Cumin',
+      'Green chilli',
+      'Oil',
+      'Salt'
+    ],
+    steps: [
+      'Prepare dough with flour and oil',
+      'Make spicy potato filling',
+      'Fill samosa and seal edges',
+      'Deep fry until golden',
+      'Serve with chutney'
+    ],
+    duration: 50,
+    complexity: Complexity.challenging,
+    affordability: Affordability.affordable,
+    isVegetarian: true,
+  ),
+
+  // Chatpata
+  Meal(
+    id: 'm13',
+    categories: ['c13', 'c3'],
+    title: 'Bhel Puri',
+    imageUrl:
+        'https://i.ytimg.com/vi/fMJQOsM87fM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBSLnevjaPor2Fw4-YwrYaPBMpOaw',
+    ingredients: [
+      'Puffed rice',
+      'Sev',
+      'Onion',
+      'Tomato',
+      'Tamarind chutney',
+      'Green chutney',
+      'Coriander'
+    ],
+    steps: [
+      'Add puffed rice into bowl',
+      'Add onion tomato and coriander',
+      'Mix chutneys',
+      'Add sev on top',
+      'Serve immediately'
+    ],
+    duration: 10,
+    complexity: Complexity.simple,
+    affordability: Affordability.affordable,
+    isVegetarian: true,
+  ),
+
+  // Tandoori
+  Meal(
+    id: 'm14',
+    categories: ['c14', 'c10'],
+    title: 'Tandoori Chicken',
+    imageUrl:
+        'https://cti.farziengineer.co/products/Chicken_Whole_in_tandoori_With_Skin-02a48764cccd.jpg?auto=format&sharp=20&ixlib=react-9.3.0',
+    ingredients: [
+      'Chicken',
+      'Yogurt',
+      'Tandoori masala',
+      'Lemon',
+      'Ginger garlic paste',
+      'Red chilli powder'
+    ],
+    steps: [
+      'Make marinade with yogurt and spices',
+      'Coat chicken and rest 2 hours',
+      'Bake/grill in oven or tandoor',
+      'Cook till smoky and charred',
+      'Serve with onion & mint chutney'
+    ],
+    duration: 70,
+    complexity: Complexity.challenging,
+    affordability: Affordability.pricey,
+    isVegetarian: false,
+  ),
+
+  // More South Indian
+  Meal(
+    id: 'm15',
+    categories: ['c1', 'c7'],
+    title: 'Idli Sambar',
+    imageUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJnB2lNVTmdNvzMLHiHkcbvGlrffbOlbnidg&s',
+    ingredients: [
+      'Idli batter',
+      'Toor dal',
+      'Tamarind',
+      'Sambar masala',
+      'Vegetables',
+      'Curry leaves'
+    ],
+    steps: [
+      'Steam idlis',
+      'Cook dal and vegetables',
+      'Add tamarind and masala',
+      'Boil sambar',
+      'Serve with idli'
+    ],
+    duration: 35,
+    complexity: Complexity.simple,
+    affordability: Affordability.affordable,
+    isVegetarian: true,
+  ),
+
+  // More Dessert
+  Meal(
+    id: 'm16',
+    categories: ['c8'],
+    title: 'Kheer',
+    imageUrl:
+        'https://mypahadidukan.com/cdn/shop/articles/Kesar_Kheer_Recipe_ad0e3b6b-d2aa-45b9-89e0-a7e986ea0bec.jpg?v=1761216555',
+    ingredients: [
+      'Milk',
+      'Rice',
+      'Sugar',
+      'Cardamom',
+      'Dry fruits',
+      'Ghee'
+    ],
+    steps: [
+      'Boil milk',
+      'Add rice and cook slowly',
+      'Add sugar and cardamom',
+      'Add dry fruits',
+      'Serve chilled or warm'
+    ],
+    duration: 45,
+    complexity: Complexity.simple,
+    affordability: Affordability.affordable,
+    isVegetarian: true,
+  ),
+
 ];
 
