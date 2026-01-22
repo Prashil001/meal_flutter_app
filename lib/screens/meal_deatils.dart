@@ -1,19 +1,19 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/providers/favorites_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class MealdetailsScreen extends StatelessWidget {
-  const MealdetailsScreen({
-    super.key,
-    required this.meal,
-    required this.toggleFavourite,
-  });
+class MealdetailsScreen extends ConsumerWidget{
+  MealdetailsScreen({super.key, required this.meal});
 
   final Meal meal;
-  final void Function(Meal meal) toggleFavourite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteMeals = ref.watch(favoriteMealsProvider);
+    final isFavoriteMeal = favoriteMeals.contains(meal);
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -21,9 +21,28 @@ class MealdetailsScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             onPressed: () {
-              toggleFavourite(meal);
+              final wasAdded = ref
+                  .watch(favoriteMealsProvider.notifier)
+                  .toggleMealFavoriteStatus(meal);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    wasAdded ? 'Meal added as a favorite.' : 'Meal removed.',
+                  ),
+                ),
+              );
             },
-            icon: const Icon(Icons.star_border_rounded),
+            icon: AnimatedSwitcher(
+              duration: Duration(milliseconds: 400),
+              child: Icon(isFavoriteMeal? Icons.star: Icons.star_border,key: ValueKey(isFavoriteMeal),),
+              transitionBuilder: (child, animation){
+                return ScaleTransition(scale: Tween<double>(begin: 0.4,end: 1.7).animate(animation),
+                  child: child,
+                );
+                
+              },
+            ), 
           ),
         ],
       ),
@@ -48,12 +67,15 @@ class MealdetailsScreen extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18),
-                    child: FadeInImage(
-                      width: double.infinity,
-                      height: 280,
-                      fit: BoxFit.cover,
-                      placeholder: MemoryImage(kTransparentImage),
-                      image: NetworkImage(meal.imageUrl),
+                    child: Hero(
+                      tag: meal.id,
+                      child: FadeInImage(
+                        width: double.infinity,
+                        height: 280,
+                        fit: BoxFit.cover,
+                        placeholder: MemoryImage(kTransparentImage),
+                        image: NetworkImage(meal.imageUrl),
+                      ),
                     ),
                   ),
                 ),
@@ -91,7 +113,7 @@ class MealdetailsScreen extends StatelessWidget {
                           blurRadius: 10,
                           color: Colors.black87,
                           offset: Offset(0, 3),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -103,15 +125,17 @@ class MealdetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  const Icon(Icons.shopping_basket_rounded,
-                      color: Colors.orange),
+                  const Icon(
+                    Icons.shopping_basket_rounded,
+                    color: Colors.orange,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     "Ingredients",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.yellow
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.yellow,
+                    ),
                   ),
                 ],
               ),
@@ -133,7 +157,9 @@ class MealdetailsScreen extends StatelessWidget {
                   for (int i = 0; i < meal.ingredients.length; i++)
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 10),
+                        horizontal: 12,
+                        vertical: 10,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.blue.withOpacity(0.15),
@@ -162,9 +188,9 @@ class MealdetailsScreen extends StatelessWidget {
                   Text(
                     "Steps",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.yellow
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.yellow,
+                    ),
                   ),
                 ],
               ),
@@ -178,9 +204,7 @@ class MealdetailsScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: Colors.white.withOpacity(0.05),
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.12),
-                ),
+                border: Border.all(color: Colors.white.withOpacity(0.12)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
